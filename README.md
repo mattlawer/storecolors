@@ -1,25 +1,19 @@
-## appstat
-Get AppStore apps reviews, and rankings worldwide for every category.
+## storecolors
+Get the average colors for AppStore top apps.
 
 ## Installation
-	git clone https://github.com/mattlawer/appstat.git
-	cd appstat
-	make # 'make ios' to build for iOS 
+	git clone https://github.com/mattlawer/storecolors.git
+	cd storecolors
+	make
 	make install
 
 ## Usage
-	Usage : appstat -a <app_id> [-g <genre> -l <list_size> -r -p -f]
-		-s <search> : search an app
-		-a <app_id> : the app ID to use
-		-c <country_code> : the country code to use for the search option (ex: US)
-		-g <genre> : the genre code (ex: 6012)
-		-r : list reviews
-		-f : search top free
-		-p : search top paid
-		-l <list_size> : 1-200
+	Usage : storecolors [ -c <country_code> -l <list_size> -p ] -o output
+		-c <country_code> : the country code to use (default: US)
+		-p : search top paid (default: free)
+		-l <list_size> : 1-200 (default: 200)
+		-o <output_dir> : the output directory
 	
 	example:
-		appstat -s Omnistat -g 6002
-		appstat -a 898245825 -r
-
-![](http://oi57.tinypic.com/34pdkll.jpg "Example")
+		storecolors -c US -l 50
+		will scan the 50 top free apps in US

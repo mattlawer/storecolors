@@ -1,40 +1,24 @@
 CC=gcc
-FRAMEWORKS= -framework Foundation
+FRAMEWORKS= -framework Foundation -framework AppKit 
 LIBRARIES= -lobjc
 
-PRODUCT=appstat
-SRC=appstat.m
+PRODUCT=storecolors
+SRC=storecolors.m
 
 CFLAGS=-Wall -g
 LDFLAGS=$(LIBRARIES) $(FRAMEWORKS)
 
-#iOS
-IOS_ARCHS=armv7 armv7s arm64
-SDKVERSION=
-SDKMINVERSION=7.0
-SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS$(SDKVERSION).sdk
+.PHONY: all clean install
 
-build-ios-arch=$(CC) $(SRC) $(CFLAGS) $(LDFLAGS) -isysroot $(SYSROOT) -mios-version-min=$(SDKMINVERSION) $(FRAMEWORKS) -arch $(1) -o $(PRODUCT)_$(1)
+all : storecolors clean
 
-
-.PHONY: all ios clean install
-
-all : appstat clean
-
-ios : appstat_ios clean
-
-appstat : $(SRC)
+storecolors : $(SRC)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(SRC) -o $(PRODUCT)
-
-appstat_ios : $(SRC)
-	rm -f $(PRODUCT)_fat
-	$(foreach arch,$(IOS_ARCHS),$(call build-ios-arch,$(arch));)
-	lipo -create $(addprefix ${PRODUCT}_,${IOS_ARCHS}) -output $(PRODUCT)_ios
 
 clean :
 	rm -rf ./*.o ./*.dSYM
 
 install :
-	sudo cp appstat /usr/local/bin/
+	sudo cp storecolors /usr/local/bin/
 
-	
+	blog.mathieubolard.com
